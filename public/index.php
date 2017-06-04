@@ -1,4 +1,6 @@
+<?php require_once("../includes/functions.php"); ?>
 <?php require_once("../includes/db_connection.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,21 +32,32 @@
 <div class="container">
   <div class="row">
     <section class="col-12">
-      <form action="index.php>page=<?php echo urlencode(str); ?>" method ="post">
+      <form action="index.php?page=<?php echo urlencode("string"); ?>" method ="post">
         Name of establishment: 
         <input type="text" name="ESTABLISHMENT_NAME"> </input>
         <input type="submit" value="submit" >
       </form>
-      <p> The establishment, recieved with the status of 
+      <p> Establishment detail: 
+      <div class="post-heading">
         <?php 
           if(isset($_POST["ESTABLISHMENT_NAME"])){
-            $query = "SELECT FROM Dinesafe ";
+            global $connection;
+            $ESTABLISHMENT_NAME = $_POST["ESTABLISHMENT_NAME"];
+            $safe_estb_name_id = mysqli_real_escape_string($connection, $ESTABLISHMENT_NAME);
+            $query = "SELECT * FROM Dinesafe ";
             $query .= "WHERE ESTABLISHMENT_NAME = ";
-            $query .= "{$_POST["ESTABLISHMENT_NAME"]} ";
-            $query .= "LIMIT 1";
-          }          
-
+            $query .= "'{$safe_estb_name_id}'";
+            //$query .= "LIMIT 1";
+            $dine_set = mysqli_query($connection ,$query);
+            confirm_query($dine_set);
+            while ($dine = mysqli_fetch_assoc($dine_set)){
+            	echo implode("||" ,$dine);
+            	echo "<br/>";
+            	echo "<br/>";
+            }
+          }
         ?>
+       </div> 
       </p>
     </section>
   </div>
