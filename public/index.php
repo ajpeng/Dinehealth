@@ -13,52 +13,49 @@
 </head>
 <body>
 
-<div class="container">
-  <div class="clow">
-    <section class="col-12">
-      <ul class="nav">
-        <li class="nav-item"><a href="#">Home</a></li>
-        <li class="nav-item"><a href="#">Mission</a></li>
-        <li class="nav-item"><a href="#">Services</a></li>
-        <li class="nav-item"><a href="#">Staff</a></li>
-        <li class="nav-item"><a href="#">Testimonials</a></li>
-      </ul>
-    </section>
-  </div>
-</div>
+<nav class="nav-bar-default">
+	<div class="container-fluid">
+	  <div class="navbar-header">
+	    <section class="row-12">
+	    <a class="navbar-brand">Dinesafe</a>
+	  </div>
+	      <ul class="nav navbar-nav">
+	        <li class="nav-item"><a href="#">Home</a></li>
+	        <li class="nav-item"><a href="#">Mission</a></li>
+	        <li class="nav-item"><a href="#">Services</a></li>
+	        <li class="nav-item"><a href="#">Staff</a></li>
+	        <li class="nav-item"><a href="#">Testimonials</a></li>
+	      </ul>
+	    </section>
+	  </div>
+	</div>
+</nav>
 
-<hr/>
+
+<hr/> <!-- -->
 
 <div class="container">
   <div class="row">
     <section class="col-12">
       <form action="index.php?page=<?php echo urlencode("string"); ?>" method ="post">
-        Name of establishment: 
-        <input type="text" name="ESTABLISHMENT_NAME"> </input>
-        <input type="submit" value="submit" >
+        <h3> Name of establishment:  </h3>
+        <input type="text" class="form-control" name="ESTABLISHMENT_NAME"> </input>
+        <br/>
+        <input class="btn-primary" type="submit" value="submit" >
       </form>
-      <p> Establishment detail: 
       <div class="post-heading">
-        <?php 
-          if(isset($_POST["ESTABLISHMENT_NAME"])){
-            global $connection;
-            $ESTABLISHMENT_NAME = $_POST["ESTABLISHMENT_NAME"];
-            $safe_estb_name_id = mysqli_real_escape_string($connection, $ESTABLISHMENT_NAME);
-            $query = "SELECT * FROM Dinesafe ";
-            $query .= "WHERE ESTABLISHMENT_NAME = ";
-            $query .= "'{$safe_estb_name_id}'";
-            //$query .= "LIMIT 1";
-            $dine_set = mysqli_query($connection ,$query);
-            confirm_query($dine_set);
-            while ($dine = mysqli_fetch_assoc($dine_set)){
-            	echo implode("||" ,$dine);
-            	echo "<br/>";
-            	echo "<br/>";
-            }
-          }
+        <?php
+              $html = "<br//>";
+              $html .= "<h4>show details: <//h4>";
+              $html .= "<h4>inspection date: <//h4>";
+              $html .= "<h4>amount fined: <//h4";
+              $html = "<br//>";
+              $html .= implode_all_data();
+
+          //    $html .= show_fine(INSPECTION_ID);
+              echo $html;
         ?>
-       </div> 
-      </p>
+       </div>
     </section>
   </div>
 </div>

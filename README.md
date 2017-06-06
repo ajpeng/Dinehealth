@@ -1,2 +1,2 @@
 # This is a web-application created using the WAMP stack using data provided from [OpenData Toronto](http://www1.toronto.ca/wps/portal/contentonly?vgnextoid=9e56e03bb8d1e310VgnVCM10000071d60f89RCRD). 
-## If you run your own apache server, rename the db_connection_example.php file to db_connection.php and update the required fields. The file is currently store in the /includes/ folder.
+#### If you wish to run it on your own server, rename the db_connection_example.php file to db_connection.php and update the required fields. The file is currently store in the /includes/ folder.
