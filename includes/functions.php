@@ -12,19 +12,24 @@
             $ESTABLISHMENT_NAME = $_POST["ESTABLISHMENT_NAME"];
             $safe_estb_name = mysqli_real_escape_string($connection, $ESTABLISHMENT_NAME);
             //$query = "SELECT INSPECTION_ID AND ESTABLISHMENT_NAME AND STATUS FROM Dinesafe ";
-						$query = "SELECT ESTABLISHMENT_NAME , INSPECTION_DATE , SEVERITY FROM Dinesafe ";
+						$query = "SELECT ESTABLISHMENT_NAME , INSPECTION_DATE , SEVERITY , ESTABLISHMENT_STATUS , INSPECTION_ID FROM Dinesafe ";
             $query .= "WHERE ESTABLISHMENT_NAME LIKE ";
             $query .= "'%{$safe_estb_name}%'";
             //$query .= "LIMIT 1";
             $dine_set = mysqli_query($connection ,$query);
             confirm_query($dine_set);
             $result = "";
-            while ($dine = mysqli_fetch_assoc($dine_set)){
-							$hyperlink =  create_hyperlink(get_inspection_id());
-            	$result .= implode($hyperlink ,$dine);
-            	$result .= "<hr>";
 
+            while ($row = mysqli_fetch_assoc($dine_set)){
+							$result .= "<tr>";
+							$result .= "<td>" . $row['ESTABLISHMENT_NAME'] . "</td>";
+							$result .= "<td>" . $row['INSPECTION_DATE'] . "</td>";
+							$result .= "<td>" . $row['SEVERITY'] . "</td>";
+							$result .= "<td>" . $row['ESTABLISHMENT_STATUS'] . "</td>";
+							$result .= "<td>" . "<a href='?inspection_id=" . $row['INSPECTION_ID'] .  "'>More info." . "<//a>" . "<td>";
+							$result .= "<//tr>";
             }
+
             return $result;
         }
 	}
