@@ -48,11 +48,11 @@
               $html = "
               Establishment Name &nbsp Inspection Date &nbsp Severity
               ";
-              $html .= "<br//>";
-              $html .= "<a href=\"\"";
-              $html .= implode_all_data();
-              $html .= "</a>";
+              $html .= "<hr//>";
+              while($link_info = get_inspection_id("hello")){
+              //  $html .= create_hyperlink("hello");
 
+              }
              //$html .= show_fine(INSPECTION_ID);
               echo $html;
         ?>

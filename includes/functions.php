@@ -20,12 +20,12 @@
             confirm_query($dine_set);
             $result = "";
             while ($dine = mysqli_fetch_assoc($dine_set)){
-            	$result .= implode(" &nbsp " ,$dine);
+							$hyperlink =  create_hyperlink(get_inspection_id());
+            	$result .= implode($hyperlink ,$dine);
             	$result .= "<hr>";
 
             }
             return $result;
-
         }
 	}
 
@@ -33,16 +33,11 @@
 		global $connection;
 		$ESTABLISHMENT_NAME = $_POST["ESTABLISHMENT_NAME"];
 		$safe_estb_name = mysqli_real_escape_string($connection, $ESTABLISHMENT_NAME);
-		$query = "SELECT inspection_id FROM dinesafe WHERE ESTABLISHMENT_NAME LIKE '%{$safe_estb_name_id}%'";
+		$query = "SELECT inspection_id FROM dinesafe WHERE ESTABLISHMENT_NAME LIKE '%{$safe_estb_name}%'";
 		$result_set = mysqli_query($connection, $query);
-
-		$result = "";
-		while ($dine = mysqli_fetch_assoc($result_set)){
-			$result .= implode("",$dine);
-			$result .= "<hr>";
-		}
-		return $result;
+		return $result_set;
 	}
+
 
 	function show_details(){
 		if(isset($_POST["ESTABLISHMENT_NAME"])){
@@ -63,8 +58,14 @@
         }
 	}
 
-	function find_fine($INSPECTION_ID){
+
+	function create_hyperlink($id){
 		global $connection;
+
+		$link = "<a href='";
+		$link .= "{$id}";
+		$link .= "'></a>";
+		return $link;
 	}
 
 ?>
