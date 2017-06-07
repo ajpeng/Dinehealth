@@ -39,29 +39,28 @@
     <section class="col-12">
       <form action="index.php?page=<?php echo urlencode("string"); ?>" method ="post">
         <h3> Name of establishment:  </h3>
-        <input type="text" class="form-control" name="ESTABLISHMENT_NAME"> </input>
+        <input type="text" class="form-control" id="ESTABLISHMENT_NAME" name="ESTABLISHMENT_NAME"> </input>
         <br/>
         <input class="btn-primary" type="submit" value="submit" >
       </form>
       <div class="post-heading">
         <?php
-              $html = "<br//>";
-              $html .= "<h4>show details: <//h4>";
-              $html .= "<h4>inspection date: <//h4>";
-              $html .= "<h4>amount fined: <//h4";
-              $html = "<br//>";
+              $html = "
+              Establishment Name &nbsp Inspection Date &nbsp Severity
+              ";
+              $html .= "<br//>";
+              $html .= "<a href=\"\"";
               $html .= implode_all_data();
+              $html .= "</a>";
 
-          //    $html .= show_fine(INSPECTION_ID);
+             //$html .= show_fine(INSPECTION_ID);
               echo $html;
         ?>
        </div>
     </section>
   </div>
 </div>
-
-
-
+<script src="js/main.js"></script>
 <script src="js/jquery.slim.min.js"></script>
 <script src="js/tether.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
